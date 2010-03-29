@@ -22,8 +22,18 @@
 	$latitude = mysql_real_escape_string($_GET['lat']);
 	$longitude = mysql_real_escape_string($_GET['lng']);
 	$radius = mysql_real_escape_string($_GET['radius']);
+	$full_status = mysql_real_escape_string($_GET['full']);
 
 	// Run the query
-	getSites($latitude, $longitude, $radius);
+	
+	if ($_GET['html'] == 'true') {
+		
+		getHTMLSites($latitude, $longitude, $radius, $full_status);
+		
+	} else {
+	
+		getSites($latitude, $longitude, $radius, $full_status);
+		
+	}
 
 ?>
