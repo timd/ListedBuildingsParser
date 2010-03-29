@@ -12,6 +12,8 @@
  //		- Initial version
  //--------------------------------------------------------------------------
 
+require("database.php");
+
 function getSites($latitude, $longitude, $search_radius) {
 	
 	// Function that returns an XML list of listed buildings
@@ -19,7 +21,7 @@ function getSites($latitude, $longitude, $search_radius) {
 	
 	// Load required modules
 	require_once("phpcoord.php");
-	require_once("database.php");
+	require("database.php");
 
 	// Create new LatLng object
 	$latlng = new LatLng($latitude, $longitude);
@@ -87,6 +89,7 @@ function getSites($latitude, $longitude, $search_radius) {
 
 		// Close the buildings tag
 		print "</buildings>\n";
+		mysql_close($db_handle);
 
 	}
 	else 
@@ -96,11 +99,12 @@ function getSites($latitude, $longitude, $search_radius) {
 		print "<buildings>\n";
 		print " <building>DATABASE ERROR</building>\n";
 		print "</buildings>\n";
+		mysql_close($db_handle);
 
 	}
 
 	// Close the database connection
-	mysql_close($db_handle);
+
 }
 
 ?>
